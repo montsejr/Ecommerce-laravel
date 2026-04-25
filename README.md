@@ -1,46 +1,79 @@
-# Ecommerce Laravel
+# Ecommerce Laravel - Proyecto
 
-## Requisitos
-- PHP 8.2
-- Composer
-- Node.js
-- XAMPP (MySQL)
+Este proyecto consiste en el desarrollo de un sistema básico de comercio electrónico utilizando Laravel. Incluye funcionalidades como registro de usuarios, inicio de sesión y base para la gestión de productos.
 
-## Instalación
+---
+
+## Tecnologías utilizadas
+
+* PHP 8.2
+* Laravel
+* Composer
+* Node.js
+* XAMPP (MySQL)
+
+---
+
+## Instalación del proyecto
 
 1. Clonar el repositorio:
+
 git clone https://github.com/Montsejr/ecommerce-laravel.git
 
-2. Entrar al proyecto:
+2. Entrar a la carpeta del proyecto:
+
 cd ecommerce-laravel
 
-3. Instalar dependencias:
+3. Instalar dependencias de Laravel:
+
 composer install
 
-4. Instalar frontend:
+4. Instalar dependencias de frontend:
+
 npm install
 npm run build
 
-5. Configurar archivo .env:
-Copiar .env.example a .env y configurar la base de datos:
+5. Configurar archivo `.env`:
+
+Copiar el archivo `.env.example` y renombrarlo a `.env`, luego configurar:
 
 DB_DATABASE=ecommerce
 DB_USERNAME=root
 DB_PASSWORD=
 
-6. Generar clave:
+6. Generar clave de la aplicación:
+
 php artisan key:generate
 
 7. Ejecutar migraciones:
+
 php artisan migrate
 
-8. Ejecutar servidor:
+---
+
+## Ejecutar el proyecto
+
+Para iniciar el sistema, ejecutar:
+
 php artisan serve
 
-## Acceso
+Después abrir en el navegador:
+
 http://127.0.0.1:8000
 
-## Funcionalidades
-- Registro de usuarios
-- Login
-- Sistema base Ecommerce
+---
+
+## Funcionalidades actuales
+
+* Registro de usuarios
+* Inicio de sesión
+* Base del sistema Ecommerce
+
+---
+
+## Notas
+
+Este proyecto se ejecuta de manera local, por lo que es necesario tener activo XAMPP (Apache y MySQL).
+
+---
+
