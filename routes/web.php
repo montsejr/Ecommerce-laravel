@@ -5,15 +5,24 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| WEB ROUTES
 |--------------------------------------------------------------------------
 */
 
+/*
+|--------------------------------------------------------------------------
+| 🏠 INICIO
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
-    return view('welcome');
+
+    $products = Product::all();
+
+    return view('welcome', compact('products'));
 });
 
 /*
@@ -21,13 +30,13 @@ Route::get('/', function () {
 | 🔐 SOLO ADMIN PUEDE PRODUCTOS
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('products', ProductController::class);
 });
 
 /*
 |--------------------------------------------------------------------------
-| DASHBOARD
+| 📊 DASHBOARD
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard', function () {
@@ -39,16 +48,19 @@ Route::get('/dashboard', function () {
 | 🛒 CARRITO
 |--------------------------------------------------------------------------
 */
-Route::post('/cart/add/{id}', [CartController::class, 'add']);
-Route::get('/cart', [CartController::class, 'index']);
-Route::get('/cart/remove/{id}', [CartController::class, 'remove']);
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 /*
 |--------------------------------------------------------------------------
 | 💳 CHECKOUT
 |--------------------------------------------------------------------------
 */
-Route::get('/checkout', [CheckoutController::class, 'index']);
+Route::get('/checkout', [CheckoutController::class, 'index'])
+    ->name('checkout.index');
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +68,15 @@ Route::get('/checkout', [CheckoutController::class, 'index']);
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
